@@ -7,18 +7,22 @@
 // Usage: GROQ_API_KEY=... node scripts/update-results.mjs
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { execSync } from 'node:child_process';
 
 const FILE = new URL('../index.html', import.meta.url);
 const GROQ_KEY = process.env.GROQ_API_KEY;
 const MODEL = 'groq/compound-mini';
+const CALL_SPACING_MS = 4000; // spread requests out so we don't burst the free-tier TPM limit
 
 if (!GROQ_KEY) {
   console.error('GROQ_API_KEY is not set.');
   process.exit(1);
 }
 
-async function askGroq(prompt) {
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function askGroq(prompt, attempt = 1) {
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -31,6 +35,18 @@ async function askGroq(prompt) {
       temperature: 0,
     }),
   });
+
+  // Transient errors (rate limit, oversized request, server hiccup): back
+  // off and retry a couple of times before giving up on this one call.
+  if ((res.status === 429 || res.status === 413 || res.status >= 500) && attempt < 3) {
+    const bodyText = await res.text();
+    const waitHint = bodyText.match(/try again in ([\d.]+)s/i);
+    const waitMs = waitHint ? Math.ceil(parseFloat(waitHint[1]) * 1000) + 500 : 8000 * attempt;
+    console.log(`Groq ${res.status}, retrying in ${Math.round(waitMs / 1000)}s (attempt ${attempt + 1})...`);
+    await sleep(waitMs);
+    return askGroq(prompt, attempt + 1);
+  }
+
   if (!res.ok) {
     throw new Error(`Groq API error ${res.status}: ${await res.text()}`);
   }
@@ -110,6 +126,7 @@ Never guess or invent a winner. Only report "happened": true if you found a real
       parsed = extractJson(reply);
     } catch (e) {
       console.error(`Groq call failed for ${ev.name}:`, e.message);
+      await sleep(CALL_SPACING_MS);
       continue;
     }
 
@@ -121,6 +138,7 @@ Never guess or invent a winner. Only report "happened": true if you found a real
       changedNames.push(ev.name);
       console.log(`Updated: ${ev.name} — ${parsed.winner}`);
     }
+    await sleep(CALL_SPACING_MS);
   }
 
   if (changed > 0) {
@@ -146,13 +164,15 @@ Never guess or invent a winner. Only report "happened": true if you found a real
         reply = (await askGroq(prompt)).trim();
       } catch (e) {
         console.error(`Groq ticker call failed for ${seriesAlt}:`, e.message);
+        await sleep(CALL_SPACING_MS);
         continue;
       }
-      if (!reply || reply === 'NO_UPDATE' || reply.length > 220) continue;
-      if (reply === oldLine.trim()) continue;
-      newTickerBlock = newTickerBlock.replace(full, full.replace(oldLine, `\n      ${reply}`));
-      tickerChanged = true;
-      console.log(`Ticker updated: ${seriesAlt}`);
+      if (reply && reply !== 'NO_UPDATE' && reply.length <= 220 && reply !== oldLine.trim()) {
+        newTickerBlock = newTickerBlock.replace(full, full.replace(oldLine, `\n      ${reply}`));
+        tickerChanged = true;
+        console.log(`Ticker updated: ${seriesAlt}`);
+      }
+      await sleep(CALL_SPACING_MS);
     }
 
     if (tickerChanged) {
