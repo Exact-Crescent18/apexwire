@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APEX WIRE — Motorsport, Every Series, Every Session</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%221%22%20y%3D%221%22%20width%3D%2262%22%20height%3D%2262%22%20rx%3D%2214%22%20fill%3D%22%23101214%22%20stroke%3D%22%2331363d%22%20stroke-width%3D%221%22/%3E%3Cpath%20d%3D%22M16%2047%20L32%2015%20L48%2047%22%20fill%3D%22none%22%20stroke%3D%22%23ffb300%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M8%2032.5%20L23%2032.5%22%20fill%3D%22none%22%20stroke%3D%22%23e8402a%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M41%2032.5%20L56%2032.5%22%20fill%3D%22none%22%20stroke%3D%22%23e8402a%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2215%22%20r%3D%223.5%22%20fill%3D%22%23f1efe9%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -74,9 +75,9 @@ header.site{
 .brand{
   font-family:'Oswald',sans-serif; font-weight:700; font-size:28px;
   letter-spacing:0.01em; text-transform:uppercase;
-  display:flex; align-items:baseline; gap:2px; text-decoration:none;
+  display:flex; align-items:center; gap:9px; text-decoration:none;
 }
-.brand .mark{color:var(--red);}
+.brand .mark{display:block; width:30px; height:30px; flex-shrink:0;}
 .brand-sub{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-faint); letter-spacing:0.12em; text-transform:uppercase; margin-top:4px;}
 nav.primary{display:flex; gap:22px; font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.05em; text-transform:uppercase; color:var(--text-dim); flex-wrap:wrap;}
 nav.primary a{text-decoration:none; transition:color .15s; white-space:nowrap;}
@@ -519,19 +520,19 @@ nav.series-rail a, nav.primary a{cursor:pointer;}
   <div class="ticker-track">
     <div class="ticker-inner">
       <span><img class="ticker-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Formula_One_logo.svg" alt="F1">
-      Antonelli leads Hamilton by 50 points after Norris's win last time out — Tsunoda returns at Zandvoort for the injured Hadjar</span>
+      Norris survived a lap-1 red flag to win a chaotic Dutch GP as Verstappen crashed out — the paddock now heads to Monza</span>
       <span><img class="ticker-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/cb/NASCAR_Cup_Series_logo.svg" alt="NASCAR Cup">
-      Logano enters New Hampshire on a heater — winner of 2 of the last 4 Cup races, including Richmond</span>
+      Blaney's late two-tire gamble won the Dollar Tree 301 — now the field locks in Saturday at Daytona's regular-season finale</span>
       <span><img class="ticker-logo" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/NASCAR_OAP_SERIES_Logo.svg" alt="O'Reilly Series">
-      Kvapil has won back-to-back races at Indy and Iowa as eight drivers lock up Chase spots</span>
+      Kvapil rides a two-race win streak into Friday's Winn-Dixie 250 at Daytona, the regular-season finale that sets the Chase field</span>
       <span><img class="ticker-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/22/NASCAR_Craftsman_Truck_Series_logo.svg" alt="Truck Series">
-      Honeycutt dominated Richmond, leading 225 of 250 laps, as the Chase bubble tightens before New Hampshire</span>
+      Riggs' New Hampshire win set the 10-truck Chase field — Ankrum grabbed the last spot by just 7 points over Friesen</span>
       <span><img class="ticker-logo" src="https://upload.wikimedia.org/wikipedia/en/3/33/ARCA_Menards_Series_Logo.svg" alt="ARCA">
-      Series graduates swept the top of the board at Iowa as the stretch run to the Kansas finale begins</span>
+      Max Reaves led 98 of 100 laps to sweep the Illinois State Fairgrounds dirt mile, his 3rd win of the year</span>
       <span><img class="ticker-logo" src="https://upload.wikimedia.org/wikipedia/en/b/b5/IndyCar_Series_logo.svg" alt="NTT IndyCar">
-      Palou's Portland win — his 6th of the season — stretched his championship lead to 110 points over Kirkwood</span>
+      Kirkwood's dominant D.C. win cut Palou's championship lead to 91 points ahead of the Milwaukee doubleheader</span>
       <span><img class="ticker-logo" src="https://upload.wikimedia.org/wikipedia/en/a/a8/IndyNXTLogo.png" alt="Indy NXT">
-      De Tullio won at Portland as the ladder series heads to Milwaukee before the Laguna Seca finale</span>
+      Fittipaldi leads a tight title fight by just 18 points over Johnson and Kucharczyk as the ladder heads to Milwaukee</span>
       <span><img class="ticker-logo ticker-logo-white" src="https://upload.wikimedia.org/wikipedia/commons/f/f9/MotoGP_logo_%282024%29.svg" alt="MotoGP">
       Fernández won a wide-open British GP at Silverstone — just 24 points cover the top five in the standings</span>
       <span><img class="ticker-logo" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/FIA_WEC_Logo_2024.png" alt="WEC">
@@ -544,7 +545,12 @@ nav.series-rail a, nav.primary a{cursor:pointer;}
 <header class="site">
   <div class="header-top">
     <div>
-      <a class="brand" href="#home" data-view="home"><span class="mark">/</span>APEX WIRE</a>
+      <a class="brand" href="#home" data-view="home"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M16 47 L32 15 L48 47" fill="none" stroke="#ffb300" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 32.5 L23 32.5" fill="none" stroke="#e8402a" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M41 32.5 L58 32.5" fill="none" stroke="#e8402a" stroke-width="4.5" stroke-linecap="round"/>
+        <circle cx="32" cy="15" r="4" fill="#f1efe9"/>
+      </svg>APEX WIRE</a>
       <div class="brand-sub">Every series. Every session. One line.</div>
     </div>
     <nav class="primary">
