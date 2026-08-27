@@ -168,7 +168,7 @@ Never guess or invent a winner. Only report "happened": true if you found a real
         continue;
       }
       if (reply && reply !== 'NO_UPDATE' && reply.length <= 220 && reply !== oldLine.trim()) {
-        newTickerBlock = newTickerBlock.replace(full, full.replace(oldLine, `\n      ${reply}`));
+        newTickerBlock = newTickerBlock.replace(full, full.replace(oldLine, reply));
         tickerChanged = true;
         console.log(`Ticker updated: ${seriesAlt}`);
       }
