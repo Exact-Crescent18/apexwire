@@ -1,6 +1,6 @@
 name: Update race results
 
-on:
+"on":
   schedule:
     - cron: '0 * * * *' # hourly
   workflow_dispatch: {} # allows manual "Run workflow" from the Actions tab
